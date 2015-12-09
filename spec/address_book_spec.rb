@@ -127,4 +127,12 @@ RSpec.describe AddressBook do
     end
   end
 
+  describe "#vaporize" do
+    it "removes all entries from AddressBook" do
+      book.import_from_csv("entries.csv")
+      book.vaporize
+      expect(book.entries.size).to eq(0)
+    end
+  end
+
 end

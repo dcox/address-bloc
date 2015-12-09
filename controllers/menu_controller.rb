@@ -13,7 +13,8 @@ class MenuController
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
-    puts "5 - Exit"
+    puts "5 - Delete all entries"
+    puts "6 - Exit"
     print "Enter your selection: "
 
     selection = gets.to_i
@@ -36,6 +37,10 @@ class MenuController
       read_csv
       main_menu
     when 5
+      system "clear"
+      vaporize_entries
+      main_menu
+    when 6
       puts "Good-bye!"
       exit(0)
     else
@@ -129,6 +134,25 @@ class MenuController
     end
   end
 
+  def vaporize_entries
+    puts "Are you sure you want to delete your address book? y/n: "
+    choice = gets.chomp
+
+    case choice
+    when "y"
+      @address_book.vaporize
+      system "clear"
+      main_menu
+    when "n"
+      system "clear"
+      main_menu
+    else
+      system "clear"
+      puts "#{choice} is not a valid input"
+      vaporize_entries
+    end
+  end
+
   def entry_submenu(entry)
     puts "\nn - next entry"
     puts "d - delete entry"
@@ -150,7 +174,7 @@ class MenuController
     else
       system "clear"
       puts "#{selection} is not a valid input"
-      entries_submenu(entry)
+      entry_submenu(entry)
     end
   end
 
@@ -179,4 +203,5 @@ class MenuController
       puts entry.to_s
       search_submenu(entry)
     end
+  end
 end
