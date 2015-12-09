@@ -99,5 +99,4 @@ class MenuController
       entries_submenu(entry)
     end
   end
-
 end
